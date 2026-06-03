@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PATH NOMAD — Multidisciplinary creative agency. Art, design, exhibitions, and Creative Nomad membership from R350/month. Johannesburg.">
+    <title>PATH NOMAD • Art • Design • Creative Nomads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Josefin+Sans:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --ink: #1C1C1C;
+            --ink-muted: #545454;
+            --green: #A8D65A;
+            --line: #E8E8E8;
+        }
+
+        body {
+            font-family: 'Arimo', system-ui, sans-serif;
+            color: var(--ink);
+            background: var(--white);
+        }
+
+        .font-display {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+        }
+
+        .font-label {
+            font-family: 'Josefin Sans', sans-serif;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+        }
+
+        .text-green { color: var(--green); }
+        .bg-green { background-color: var(--green); }
+        .border-green { border-color: var(--green); }
+
+        .brand-wordmark .nomad-o {
+            color: var(--green);
+            position: relative;
+        }
+
+        .vertical-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            color: var(--ink-muted);
+        }
+
+        .vertical-title.left { transform: rotate(180deg); }
+
+        .section-rule {
+            height: 1px;
+            background: var(--line);
+            max-width: 120px;
+        }
+
+        .nav-link {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: var(--ink); }
+
+        .btn-primary {
+            font-family: 'Josefin Sans', sans-serif;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--ink);
+            color: var(--white);
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-primary:hover { background: var(--green); color: var(--ink); }
+
+        .btn-outline {
+            font-family: 'Josefin Sans', sans-serif;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            transition: all 0.2s;
+        }
+        .btn-outline:hover { background: var(--ink); color: var(--white); }
+
+        .pdf-footer {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            line-height: 1.9;
+        }
+
+        .manifesto p {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            line-height: 1.85;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .portfolio-card {
+            transition: opacity 0.3s;
+        }
+        .portfolio-card:hover { opacity: 0.92; }
+
+        .pricing-card {
+            border: 1px solid var(--line);
+            box-shadow: 0 40px 80px -40px rgba(0,0,0,0.08);
+        }
+
+        .nav-scrolled {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 0 var(--line);
+        }
+
+        .modal-content { animation: slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        details summary { list-style: none; cursor: pointer; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .faq-chevron { transform: rotate(180deg); }
+
+        .hero-art-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: clamp(4rem, 12vw, 9rem);
+            letter-spacing: 0.08em;
+            line-height: 0.85;
+            color: var(--ink-muted);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between h-[72px]">
+            <a href="#" class="flex items-center gap-3">
+                <img src="assets/logo-full.jpg" alt="PATH NOMAD" class="h-10 md:h-11 w-auto object-contain">
+            </a>
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#exhibitions" class="nav-link">Exhibitions</a>
+                <a href="#experiential" class="nav-link">Experiential</a>
+                <a href="#brand" class="nav-link">Brand</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#membership" class="nav-link">Membership</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="portal.html" class="hidden md:inline nav-link">Member portal</a>
+                <a href="#contact" class="hidden md:inline nav-link">Contact</a>
+                <button onclick="openSubscribeModal()" class="btn-primary px-5 py-2.5 rounded-none">
+                    Join — R350/mo
+                </button>
+                <button class="lg:hidden p-2" onclick="toggleMobileMenu()" aria-label="Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="1.5" d="M4 8h16M4 16h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-[#E8E8E8] bg-white px-6 py-6 flex flex-col gap-4">
+            <a href="#about" onclick="toggleMobileMenu()" class="nav-link">About</a>
+            <a href="#exhibitions" onclick="toggleMobileMenu()" class="nav-link">Exhibitions</a>
+            <a href="#experiential" onclick="toggleMobileMenu()" class="nav-link">Experiential</a>
+            <a href="#brand" onclick="toggleMobileMenu()" class="nav-link">Brand</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="nav-link">Projects</a>
+            <a href="#membership" onclick="toggleMobileMenu()" class="nav-link">Membership</a>
+            <a href="portal.html" onclick="toggleMobileMenu()" class="nav-link text-green">Member portal</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero (PDF cover aesthetic) -->
+    <header class="relative min-h-[100dvh] pt-[72px] bg-white overflow-hidden">
+        <div class="section-rule absolute top-[88px] left-6 md:left-10"></div>
+
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 relative">
+            <div class="grid lg:grid-cols-12 gap-6 min-h-[calc(100dvh-72px)] items-center py-12 lg:py-0">
+                <!-- Vertical ART -->
+                <div class="hidden lg:flex lg:col-span-1 justify-center">
+                    <div class="hero-art-label" style="writing-mode: vertical-rl; transform: rotate(180deg);">ART</div>
+                </div>
+
+                <div class="lg:col-span-10">
+                    <div class="flex justify-center mb-10 lg:mb-14">
+                        <img src="assets/logo-full.jpg" alt="PATH NOMAD" class="h-24 md:h-32 w-auto object-contain">
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 md:gap-5 max-w-4xl mx-auto">
+                        <div class="aspect-[4/3] overflow-hidden bg-[#f5f5f5]">
+                            <img src="assets/portfolio/p01-img0.jpg" alt="PATH NOMAD gallery space" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] overflow-hidden bg-[#f5f5f5] md:mt-12">
+                            <img src="assets/portfolio/p01-img1.jpg" alt="Gallery interior" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-12 md:mt-16 pdf-footer">
+                        <div class="text-[#1C1C1C] font-semibold tracking-[0.35em] mb-3">JOHANNESBURG</div>
+                        <div>WORK@PATHNOMAD.CO</div>
+                        <div>PATHNOMAD.CO</div>
+                        <div>060 6464 064</div>
+                    </div>
+                </div>
+
+                <!-- Vertical DESIGN -->
+                <div class="hidden lg:flex lg:col-span-1 justify-center">
+                    <div class="hero-art-label" style="writing-mode: vertical-rl;">DESIGN</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Location (PDF page 2) -->
+    <section id="location" class="border-t border-[#E8E8E8] py-20 md:py-28">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div class="flex flex-col justify-center min-h-[280px]">
+                    <div class="font-label text-[11px] text-[#545454] leading-relaxed">
+                        44 STANLEY<br>
+                        AVE,<br>
+                        BRAAMFONTEIN<br>
+                        WERF, 2017
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2 aspect-[16/10] overflow-hidden">
+                        <img src="assets/portfolio/p02-img0.jpg" alt="44 Stanley" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square overflow-hidden">
+                        <img src="assets/portfolio/p02-img1.jpg" alt="Courtyard" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square overflow-hidden">
+                        <img src="assets/portfolio/p02-img2.jpg" alt="PATH NOMAD entrance" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-16">
+                <img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8 md:h-10 w-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- About (PDF page 3) -->
+    <section id="about" class="py-20 md:py-28 bg-white">
+        <div class="max-w-[900px] mx-auto px-6 md:px-10 manifesto">
+            <p class="mb-6">PATH NOMAD IS A MULTIDISCIPLINARY CREATIVE AGENCY DEDICATED TO THE DEVELOPMENT, PRODUCTION, AND PRESENTATION OF MEANINGFUL WORK IN THE FIELDS OF ART AND DESIGN. WE SPECIALIZE IN CURATING AND PRODUCING EXHIBITIONS, DEVELOPING BESPOKE PRODUCTS, AND FOSTERING SPECIAL COLLABORATIONS BETWEEN INDEPENDENT CREATIVES AND FORWARD-THINKING BRANDS.</p>
+            <p class="mb-6">AT OUR CORE, WE ARE DRIVEN BY A DEEP RESPECT FOR THE CREATIVE PROCESS AND A COMMITMENT TO EMPOWERING WHAT WE CALL CREATIVE NOMADS—ARTISTS, DESIGNERS, AND CULTURAL PRACTITIONERS WHO MOVE FLUIDLY ACROSS DISCIPLINES, GEOGRAPHIES, AND IDEAS. WE UNDERSTAND THAT THIS PATH CAN BE BOTH INSPIRING AND DISORIENTING. THAT'S WHY WE OFFER STRATEGIC, COMPASSIONATE SUPPORT TO HELP CREATIVES ORGANIZE THEIR PRACTICE, REFINE THEIR VISION, AND PRESENT THEIR WORK TO THE WORLD WITH CLARITY AND CONFIDENCE.</p>
+            <p class="mb-6">WHETHER YOU'RE AN ARTIST PREPARING FOR YOUR FIRST SOLO SHOW, A DESIGNER DEVELOPING A PRODUCT LINE, OR A BRAND SEEKING AN AUTHENTIC, ARTFUL COLLABORATION, PATH NOMAD IS YOUR PARTNER IN SHAPING THOUGHTFUL, RESONANT EXPERIENCES. WE BUILD BRIDGES BETWEEN CREATIVITY AND STRUCTURE, INTUITION AND EXECUTION, VISION AND VISIBILITY.</p>
+            <p>PATH NOMAD IS NOT JUST A SERVICE PROVIDER—WE ARE A FELLOW TRAVELER ON YOUR CREATIVE JOURNEY.</p>
+        </div>
+
+        <!-- Leadership -->
+        <div class="max-w-[1100px] mx-auto px-6 md:px-10 mt-20">
+            <div class="grid md:grid-cols-2 gap-12 text-center mb-10 font-label text-[11px] tracking-[0.2em]">
+                <div>
+                    <div class="font-semibold text-[#1C1C1C]">MATSELA MOSHOKOA</div>
+                    <div class="text-[#545454] mt-1">(MD/CREATIVE DIRECTOR)</div>
+                </div>
+                <div>
+                    <div class="font-semibold text-[#1C1C1C]">SOPHY MALULEKE</div>
+                    <div class="text-[#545454] mt-1">(COO)</div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-3">
+                <div class="aspect-[4/5] overflow-hidden bg-[#f0f0f0]">
+                    <img src="assets/portfolio/p03-img0.jpg" alt="Matsela Moshokoa" class="w-full h-full object-cover object-top">
+                </div>
+                <div class="aspect-[4/5] overflow-hidden bg-[#f0f0f0]">
+                    <img src="assets/portfolio/p03-img1.jpg" alt="Sophy Maluleke" class="w-full h-full object-cover object-top">
+                </div>
+            </div>
+            <div class="flex justify-center mt-12">
+                <img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8 w-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- EXHIBITIONS -->
+    <section id="exhibitions" class="relative py-20 md:py-28 border-t border-[#E8E8E8]">
+        <div class="section-rule absolute top-8 left-6 md:left-10"></div>
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div class="flex justify-center mb-10">
+                <img src="assets/logo-full.jpg" alt="" class="h-16 w-auto">
+            </div>
+
+            <div class="relative grid lg:grid-cols-12 gap-8 items-start">
+                <div class="hidden lg:block lg:col-span-1">
+                    <div class="vertical-title left sticky top-32">EXHIBITIONS</div>
+                </div>
+                <div class="lg:hidden font-display text-5xl text-[#545454] mb-8">EXHIBITIONS</div>
+
+                <div class="lg:col-span-10">
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p04-img1.jpg" alt="Gallery" class="w-full h-full object-cover"></div>
+                        <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p04-img2.jpg" alt="Exhibition space" class="w-full h-full object-cover"></div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-8 mt-16">
+                        <article class="portfolio-card">
+                            <div class="aspect-[4/3] overflow-hidden mb-4"><img src="assets/portfolio/p05-img0.jpg" alt="Michael Meyersfeld" class="w-full h-full object-cover"></div>
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                MICHAEL MEYERSFELD<br>SOLO<br>APRIL 2024
+                            </div>
+                        </article>
+                        <article class="portfolio-card">
+                            <div class="aspect-[4/3] overflow-hidden mb-4"><img src="assets/portfolio/p06-img0.jpg" alt="Winter Salon" class="w-full h-full object-cover"></div>
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                PATH NOMAD WINTER SALON<br>GROUP SHOW<br>JUNE / JULY 2024
+                            </div>
+                        </article>
+                        <article class="portfolio-card">
+                            <div class="aspect-[4/3] overflow-hidden mb-4"><img src="assets/portfolio/p07-img0.jpg" alt="Motho Moeng" class="w-full h-full object-cover"></div>
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                MOTHO MOENG<br>SOLO SHOW — BORNO STATE OF MIND<br>SEP / OCT 2024
+                            </div>
+                        </article>
+                        <article class="portfolio-card">
+                            <div class="aspect-[4/3] overflow-hidden mb-4"><img src="assets/portfolio/p08-img0.jpg" alt="Eddy Ochieng" class="w-full h-full object-cover"></div>
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                EDDY OCHIENG<br>SOLO SHOW — SILENT CHATTER<br>MARCH / APRIL 2025
+                            </div>
+                        </article>
+                        <article class="portfolio-card sm:col-span-2 max-w-md">
+                            <div class="aspect-[4/3] overflow-hidden mb-4"><img src="assets/portfolio/p09-img0.jpg" alt="Orme Eyewear" class="w-full h-full object-cover"></div>
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                BRAND &amp; PRODUCT LAUNCH<br>ORME EYEWEAR — DEC 2023
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="pdf-footer text-center mt-16">WORK@PATHNOMAD.CO · PATHNOMAD.CO · 060 6464 064</div>
+        </div>
+    </section>
+
+    <!-- EXPERIENTIAL EVENTS — Collectors dinners (PDF layouts) -->
+    <section id="experiential" class="relative py-20 md:py-28 border-t border-[#E8E8E8] bg-[#FAFAFA]">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div class="relative grid lg:grid-cols-12 gap-8">
+                <div class="hidden lg:block lg:col-span-1">
+                    <div class="vertical-title left sticky top-32" style="font-size: clamp(2.5rem, 5vw, 5rem);">EXPERIENTIAL EVENTS</div>
+                </div>
+                <div class="lg:col-span-11">
+                    <div class="lg:hidden font-display text-4xl text-[#545454] mb-8 leading-none">EXPERIENTIAL<br>EVENTS</div>
+                    <p class="font-label text-[11px] text-[#545454] mb-16">CURATED EXPERIENCES AROUND ART &amp; DESIGN</p>
+
+                    <!-- JHB 2019 -->
+                    <article class="mb-20 bg-white border border-[#E8E8E8] p-6 md:p-10">
+                        <div class="grid md:grid-cols-2 gap-10 items-start mb-6">
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                CURATED EXPERIENCES AROUND ART &amp; DESIGN<br><br>
+                                COLLECTORS DINNER — JHB 2019<br>
+                                <span class="text-[#545454]">GUEST CHEF — CHEF DUEVAL MALONGA (RWANDA)</span>
+                            </div>
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p11-img0.jpg" alt="Chef Dueval Malonga plating at collectors dinner" class="w-full h-full object-cover"></div>
+                        </div>
+                        <div class="aspect-[21/9] md:aspect-[2.4/1] overflow-hidden"><img src="assets/portfolio/p11-img1.jpg" alt="Long dining table in gallery with contemporary art" class="w-full h-full object-cover"></div>
+                    </article>
+
+                    <!-- Blue Dinner LA -->
+                    <article class="mb-20">
+                        <div class="font-label text-[11px] mb-6">BLUE DINNER — DOWNTOWN LA — 2021</div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="aspect-[4/3] overflow-hidden bg-white"><img src="assets/portfolio/p12-img0.jpg" alt="Blue Dinner Los Angeles" class="w-full h-full object-cover"></div>
+                            <div class="aspect-[4/3] overflow-hidden bg-white"><img src="assets/portfolio/p12-img1.jpg" alt="Blue Dinner event" class="w-full h-full object-cover"></div>
+                        </div>
+                    </article>
+
+                    <!-- BAC Beverly Hills -->
+                    <article class="mb-20">
+                        <div class="font-label text-[11px] mb-6">BAC COLLECTORS DINNER — BEVERLY HILLS, LA — 2022</div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p13-img0.jpg" alt="BAC Collectors Dinner" class="w-full h-full object-cover"></div>
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p13-img1.jpg" alt="BAC Collectors Dinner Beverly Hills" class="w-full h-full object-cover"></div>
+                        </div>
+                    </article>
+
+                    <!-- JHB 2024 -->
+                    <article class="mb-20">
+                        <div class="font-label text-[11px] mb-6">COLLECTORS DINNER — JHB — 2024</div>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img0.jpg" alt="Collectors Dinner Johannesburg" class="w-full h-full object-cover"></div>
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img1.jpg" alt="Collectors Dinner 2024" class="w-full h-full object-cover"></div>
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img2.jpg" alt="Collectors Dinner guests" class="w-full h-full object-cover"></div>
+                        </div>
+                    </article>
+
+                    <!-- Beyond the Table -->
+                    <article class="mb-8">
+                        <div class="font-label text-[11px] mb-6">BEYOND THE TABLE DINNER — JHB — 2024</div>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img0.jpg" alt="Beyond the Table dinner" class="w-full h-full object-cover"></div>
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img1.jpg" alt="Beyond the Table experience" class="w-full h-full object-cover"></div>
+                            <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img2.jpg" alt="Beyond the Table JHB" class="w-full h-full object-cover"></div>
+                        </div>
+                    </article>
+
+                    <p class="text-center mt-12">
+                        <a href="portal.html" class="font-label text-[10px] text-green border-b border-[#A8D65A] pb-px hover:text-[#1C1C1C]">Approved members — full archive in portal →</a>
+                    </p>
+                </div>
+            </div>
+            <div class="pdf-footer text-center mt-16">WORK@PATHNOMAD.CO · PATHNOMAD.CO · 060 6464 064</div>
+        </div>
+    </section>
+
+    <!-- NELSON MAKAMO — 3-month exhibition -->
+    <section id="nelson-makamo" class="py-20 md:py-32 border-t border-[#E8E8E8]">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 text-center">
+            <div class="font-label text-[11px] text-[#545454] leading-relaxed max-w-2xl mx-auto mb-10">
+                FIRST INDEPENDENT SOLO EXHIBITION<br>
+                USA / LA — NELSON MAKAMO, 2021
+            </div>
+            <p class="font-label text-[10px] text-[#545454] max-w-xl mx-auto mb-12 leading-relaxed">
+                PRODUCED, DESIGNED, INSTALLED AND MANAGED 3 MONTH LONG EVENT
+            </p>
+            <div class="space-y-5 max-w-5xl mx-auto">
+                <div class="aspect-[16/10] overflow-hidden"><img src="assets/portfolio/p27-img1.jpg" alt="Nelson Makamo solo exhibition — gallery with blue portraits" class="w-full h-full object-cover"></div>
+                <div class="aspect-[16/9] overflow-hidden"><img src="assets/portfolio/p27-img2.jpg" alt="Nelson Makamo 3-month installation — Los Angeles" class="w-full h-full object-cover"></div>
+            </div>
+            <div class="flex justify-center mt-14"><img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8 w-auto"></div>
+        </div>
+    </section>
+
+    <!-- BRAND DEVELOPMENT -->
+    <section id="brand" class="relative py-20 md:py-28 border-t border-[#E8E8E8]">
+        <div class="section-rule absolute top-8 left-6 md:left-10"></div>
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div class="flex justify-center mb-10"><img src="assets/logo-full.jpg" alt="" class="h-14 w-auto"></div>
+            <div class="relative grid lg:grid-cols-12 gap-8 items-center">
+                <div class="hidden lg:block lg:col-span-1"><div class="vertical-title left">BRAND</div></div>
+                <div class="lg:col-span-10 grid md:grid-cols-2 gap-4">
+                    <div class="aspect-square overflow-hidden"><img src="assets/portfolio/p17-img0.jpg" alt="Coffee lifestyle brand" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square overflow-hidden"><img src="assets/portfolio/p18-img0.jpg" alt="Wine club bar" class="w-full h-full object-cover"></div>
+                </div>
+                <div class="hidden lg:block lg:col-span-1"><div class="vertical-title">DEVELOPMENT</div></div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-20 font-label text-[10px] leading-relaxed">
+                <div><span class="text-[#545454]">COFFEE LIFESTYLE BRAND</span><br>COFFEE EXPERIENCES &amp; PRODUCTS</div>
+                <div><span class="text-[#545454]">WINE CLUB BAR</span></div>
+                <div><span class="text-[#545454]">ARTISTS PROJECT SPACE</span><br>JHB — 2019–2022</div>
+                <div><span class="text-[#545454]">LIFESTYLE CONCEPT STORE</span><br>2017–2020 · LINDEN | RANDSTEAM | 44 STANLY</div>
+                <div><span class="text-[#545454]">ARTIST LEAD ARTFAIR</span><br>USA / LA — 2022 PILOT</div>
+                <div><span class="text-[#545454]">ARTIST STUDIO BRAND</span><br>APPAREL · DRY GOODS · PUBLICATION</div>
+                <div class="sm:col-span-2"><span class="text-[#545454]">NEW SOUTH AFRICAN RUM BRAND</span><br>ANANSI RUM, CRAFTED IN THE CARIBBEAN</div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 mt-10">
+                <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p19-img0.jpg" alt="Artists project space" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p20-img0.jpg" alt="Lifestyle concept store" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p23-img0.jpg" alt="Anansi Rum" class="w-full h-full object-cover"></div>
+            </div>
+            <div class="pdf-footer text-center mt-16">WORK@PATHNOMAD.CO · PATHNOMAD.CO · 060 6464 064</div>
+        </div>
+    </section>
+
+    <!-- SPECIAL PROJECTS -->
+    <section id="projects" class="py-20 md:py-28 border-t border-[#E8E8E8] bg-[#FAFAFA]">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div class="grid lg:grid-cols-12 gap-8">
+                <div class="hidden lg:block lg:col-span-2">
+                    <div class="vertical-title left sticky top-32" style="font-size: clamp(2.5rem, 4vw, 4.5rem);">SPECIAL PROJECTS</div>
+                </div>
+                <div class="lg:col-span-10">
+                    <div class="lg:hidden font-display text-4xl text-[#545454] mb-10">SPECIAL PROJECTS</div>
+
+                    <!-- Porsche South Africa / Christophorus -->
+                    <article id="porsche" class="mb-24 bg-white border border-[#E8E8E8] p-6 md:p-10">
+                        <div class="grid md:grid-cols-2 gap-10 items-start mb-6">
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                ISSUE 400 · 2021<br><br>
+                                PORSCHE<br>
+                                EXCLUSIVE<br>
+                                MAGAZINE<br><br>
+                                CHRISTOPHORUS<br>
+                                ART CAR
+                            </div>
+                            <div class="overflow-hidden bg-[#f5f5f5]">
+                                <img src="assets/portfolio/p25-img0.jpg" alt="Christophorus magazine Issue 400 — Zeitsprung cover illustration" class="w-full h-auto object-contain">
+                            </div>
+                        </div>
+                        <div class="aspect-[21/9] md:aspect-[2.2/1] overflow-hidden bg-[#f0f0f0]">
+                            <img src="assets/portfolio/p25-img2.jpg" alt="Porsche 911 art car rear — Christophorus custom wrap" class="w-full h-full object-cover object-center">
+                        </div>
+                        <p class="font-label text-[9px] text-[#545454] mt-6 text-center">PORSCHE SOUTH AFRICA · CHRISTOPHORUS EXCLUSIVE MAGAZINE · ART CAR PROJECT</p>
+                    </article>
+
+                    <!-- TIME Magazine -->
+                    <article id="time-magazine" class="mb-16 bg-white border border-[#E8E8E8] p-6 md:p-10">
+                        <div class="grid md:grid-cols-2 gap-10 items-start mb-6">
+                            <div class="font-label text-[11px] leading-relaxed text-[#1C1C1C]">
+                                TIME<br>
+                                MAGAZINE<br>
+                                COVER<br>
+                                STORY<br>
+                                2019
+                            </div>
+                            <div class="overflow-hidden border-2 border-[#C41E3A] p-1 bg-white">
+                                <img src="assets/portfolio/p26-img1.jpg" alt="TIME Magazine cover — The Art of Optimism featuring Nelson Makamo" class="w-full h-auto object-contain">
+                            </div>
+                        </div>
+                        <div class="aspect-[16/10] overflow-hidden">
+                            <img src="assets/portfolio/p26-img2.jpg" alt="Nelson Makamo painting mural for TIME cover story" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-label text-[9px] text-[#545454] mt-6 leading-relaxed max-w-2xl">
+                            SPECIAL ISSUE EDITED BY AVA DUVERNAY — THE ART OF OPTIMISM<br>
+                            <span class="text-[#1C1C1C]">ORIGINAL PORTRAIT BY SOUTH AFRICAN PAINTER NELSON MAKAMO</span>
+                        </p>
+                    </article>
+
+                    <p class="font-label text-[10px] text-[#545454]">
+                        <a href="#nelson-makamo" class="text-green hover:underline">NELSON MAKAMO 3-MONTH EXHIBITION — USA / LA 2021 ↑</a>
+                    </p>
+                </div>
+            </div>
+            <div class="flex justify-center mt-14"><img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8 w-auto"></div>
+        </div>
+    </section>
+
+    <!-- MEMBERSHIP — Creative Nomads R350 -->
+    <section id="membership" class="py-24 md:py-32 border-t border-[#E8E8E8]">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div>
+                    <div class="section-rule mb-8"></div>
+                    <div class="font-label text-[11px] text-green mb-4">CREATIVE NOMADS</div>
+                    <h2 class="font-display text-5xl md:text-6xl text-[#545454] leading-[0.95] tracking-tight">
+                        Subscribe to the<br>PATH NOMAD platform
+                    </h2>
+                    <p class="mt-8 text-[15px] leading-relaxed text-[#545454] max-w-md">
+                        For artists and creatives who move across disciplines and geographies — the same strategic, compassionate support we describe in our company profile, now as a monthly membership.
+                    </p>
+                    <ul class="mt-8 space-y-3 text-[13px] text-[#1C1C1C]">
+                        <li class="flex gap-3"><span class="text-green font-bold">—</span> Curated portfolio on PATHNOMAD.CO</li>
+                        <li class="flex gap-3"><span class="text-green font-bold">—</span> Collector &amp; curator introductions</li>
+                        <li class="flex gap-3"><span class="text-green font-bold">—</span> Exhibition &amp; experiential priority</li>
+                        <li class="flex gap-3"><span class="text-green font-bold">—</span> Editorial features &amp; lifestyle circle access</li>
+                        <li class="flex gap-3"><span class="text-green font-bold">—</span> Practice organisation &amp; visibility support</li>
+                    </ul>
+                </div>
+
+                <div class="pricing-card bg-white p-10 md:p-12">
+                    <img src="assets/logo.jpg" alt="PATH NOMAD" class="h-7 w-auto mb-8">
+
+                    <div class="flex justify-center mb-8">
+                        <div class="billing-toggle inline-flex border border-[#E8E8E8] p-1">
+                            <button id="btn-monthly" onclick="setBilling('monthly')" class="active px-5 py-2 font-label text-[10px] bg-[#1C1C1C] text-white transition">Monthly</button>
+                            <button id="btn-annual" onclick="setBilling('annual')" class="px-5 py-2 font-label text-[10px] text-[#545454] transition">Annual</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center border-b border-[#E8E8E8] pb-8 mb-8">
+                        <div class="font-label text-[10px] text-[#545454] mb-2">CREATIVE MEMBERSHIP</div>
+                        <div class="flex items-end justify-center gap-1">
+                            <span class="text-[#545454] text-xl mb-2">R</span>
+                            <span id="price-amount" class="font-display text-7xl text-[#1C1C1C] leading-none">350</span>
+                            <span id="price-period" class="text-[#545454] mb-2">/ month</span>
+                        </div>
+                        <p id="price-note" class="font-label text-[9px] text-[#545454] mt-3">BILLED MONTHLY IN ZAR</p>
+                    </div>
+
+                    <button onclick="openSubscribeModal()" class="btn-primary w-full py-4">SUBSCRIBE — R350 / MONTH</button>
+                    <a href="portal.html" class="btn-outline w-full py-4 mt-3 inline-block text-center">MEMBER PORTAL SIGN IN</a>
+                    <p class="font-label text-[9px] text-[#545454] text-center mt-4">APPROVED MEMBERS RECEIVE AN ACCESS CODE · CANCEL ANYTIME</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 border-t border-[#E8E8E8] bg-[#FAFAFA]">
+        <div class="max-w-[700px] mx-auto px-6 md:px-10">
+            <div class="font-label text-[11px] text-center mb-10">FREQUENTLY ASKED</div>
+            <div class="space-y-2">
+                <details class="bg-white border border-[#E8E8E8] px-6 py-4">
+                    <summary class="flex justify-between items-center text-[13px] font-semibold uppercase tracking-wide">
+                        Who can subscribe?
+                        <span class="faq-chevron text-green transition-transform">▼</span>
+                    </summary>
+                    <p class="mt-3 text-[13px] text-[#545454] leading-relaxed">Practicing artists and creatives with a developed body of work. Applications are reviewed to maintain the curatorial standard of PATH NOMAD.</p>
+                </details>
+                <details class="bg-white border border-[#E8E8E8] px-6 py-4">
+                    <summary class="flex justify-between items-center text-[13px] font-semibold uppercase tracking-wide">
+                        Why R350 per month?
+                        <span class="faq-chevron text-green transition-transform">▼</span>
+                    </summary>
+                    <p class="mt-3 text-[13px] text-[#545454] leading-relaxed">The fee funds curatorial support, platform hosting, collector outreach, and member events — keeping the agency independent and accessible.</p>
+                </details>
+                <details class="bg-white border border-[#E8E8E8] px-6 py-4">
+                    <summary class="flex justify-between items-center text-[13px] font-semibold uppercase tracking-wide">
+                        How do I access the member portal?
+                        <span class="faq-chevron text-green transition-transform">▼</span>
+                    </summary>
+                    <p class="mt-3 text-[13px] text-[#545454] leading-relaxed">After your application is approved, you receive an access code by email. Sign in at <a href="portal.html" class="text-green underline">pathnomad.co/portal</a> with your email and code to manage your profile, view event archives, and membership details.</p>
+                </details>
+                <details class="bg-white border border-[#E8E8E8] px-6 py-4">
+                    <summary class="flex justify-between items-center text-[13px] font-semibold uppercase tracking-wide">
+                        How does this relate to your agency work?
+                        <span class="faq-chevron text-green transition-transform">▼</span>
+                    </summary>
+                    <p class="mt-3 text-[13px] text-[#545454] leading-relaxed">Membership extends our Creative Nomads philosophy from the company profile — the same team that curates exhibitions, experiential events, and brand development now supports your practice monthly.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 md:py-28">
+        <div class="max-w-[600px] mx-auto px-6 text-center">
+            <img src="assets/logo-full.jpg" alt="PATH NOMAD" class="h-20 w-auto mx-auto mb-10">
+            <div class="pdf-footer">
+                <div class="text-[#1C1C1C] font-semibold tracking-[0.35em] mb-4">JOHANNESBURG</div>
+                <a href="mailto:work@pathnomad.co" class="hover:text-green transition">WORK@PATHNOMAD.CO</a><br>
+                <a href="https://pathnomad.co" class="hover:text-green transition">PATHNOMAD.CO</a><br>
+                <a href="tel:+27606464064" class="hover:text-green transition">060 6464 064</a>
+            </div>
+            <button onclick="openSubscribeModal()" class="btn-outline mt-12 px-10 py-3.5 inline-block">BECOME A CREATIVE NOMAD</button>
+        </div>
+    </section>
+
+    <footer class="border-t border-[#E8E8E8] py-8 text-center pdf-footer">
+        <img src="assets/logo.jpg" alt="" class="h-6 w-auto mx-auto mb-4 opacity-90">
+        PATH NOMAD © 2026 · JOHANNESBURG, SOUTH AFRICA
+    </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" onclick="if (event.target.id === 'subscribe-modal') closeSubscribeModal()" class="hidden fixed inset-0 z-[100] bg-black/40 flex items-center justify-center p-4">
+        <div class="modal-content w-full max-w-md bg-white border border-[#E8E8E8] p-8 md:p-10 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-6">
+                <img src="assets/logo.jpg" alt="PATH NOMAD" class="h-7 w-auto">
+                <button onclick="closeSubscribeModal()" class="text-[#545454] hover:text-[#1C1C1C] text-2xl leading-none">&times;</button>
+            </div>
+            <div class="font-label text-[10px] text-[#545454] mb-1">CREATIVE NOMADS MEMBERSHIP</div>
+            <div class="text-2xl font-display text-[#1C1C1C] mb-6" id="modal-price">R350 / month</div>
+
+            <form id="subscribe-form" onsubmit="submitSubscription(event)" class="space-y-4">
+                <input type="text" name="name" required placeholder="FULL NAME" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest placeholder:text-[#aaa] focus:outline-none focus:border-[#1C1C1C]">
+                <input type="email" name="email" required placeholder="EMAIL" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest placeholder:text-[#aaa] focus:outline-none focus:border-[#1C1C1C]">
+                <select name="discipline" required class="w-full border border-[#E8E8E8] py-3 px-3 font-label text-[10px] tracking-widest bg-white">
+                    <option value="">DISCIPLINE</option>
+                    <option>Photography</option>
+                    <option>Painting / Sculpture</option>
+                    <option>Fashion / Textile</option>
+                    <option>Film / Video</option>
+                    <option>Design / Object</option>
+                    <option>Writing / Criticism</option>
+                    <option>Multidisciplinary</option>
+                </select>
+                <input type="url" name="portfolio" placeholder="PORTFOLIO LINK" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest placeholder:text-[#aaa] focus:outline-none focus:border-[#1C1C1C]">
+                <input type="text" name="location" required placeholder="CITY / COUNTRY" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest placeholder:text-[#aaa] focus:outline-none focus:border-[#1C1C1C]">
+                <select id="form-billing" name="billing" onchange="syncBillingFromForm()" class="w-full border border-[#E8E8E8] py-3 px-3 font-label text-[10px] bg-white">
+                    <option value="monthly">R350 / MONTH</option>
+                    <option value="annual">R3,500 / YEAR</option>
+                </select>
+                <label class="flex gap-2 text-[10px] text-[#545454] font-label leading-relaxed">
+                    <input type="checkbox" required class="mt-0.5 accent-[#A8D65A]">
+                    I agree to membership terms. Application reviewed within 48 hours.
+                </label>
+                <button type="submit" class="btn-primary w-full py-4 mt-2">SUBMIT APPLICATION</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[200]"></div>
+
+    <script src="js/pathnomad-members.js"></script>
+    <script>
+        let billingMode = 'monthly';
+        const PRICING = {
+            monthly: { amount: '350', period: '/ month', note: 'BILLED MONTHLY IN ZAR', modal: 'R350 / month' },
+            annual: { amount: '3,500', period: '/ year', note: 'R3,500 ANNUALLY — SAVE R700', modal: 'R3,500 / year' }
+        };
+
+        function setBilling(mode) {
+            billingMode = mode;
+            const p = PRICING[mode];
+            document.getElementById('price-amount').textContent = p.amount;
+            document.getElementById('price-period').textContent = p.period;
+            document.getElementById('price-note').textContent = p.note;
+            document.getElementById('modal-price').textContent = p.modal;
+            document.getElementById('btn-monthly').className = mode === 'monthly'
+                ? 'active px-5 py-2 font-label text-[10px] bg-[#1C1C1C] text-white transition'
+                : 'px-5 py-2 font-label text-[10px] text-[#545454] transition';
+            document.getElementById('btn-annual').className = mode === 'annual'
+                ? 'active px-5 py-2 font-label text-[10px] bg-[#1C1C1C] text-white transition'
+                : 'px-5 py-2 font-label text-[10px] text-[#545454] transition';
+            const fb = document.getElementById('form-billing');
+            if (fb) fb.value = mode;
+        }
+
+        function syncBillingFromForm() { setBilling(document.getElementById('form-billing').value); }
+
+        function openSubscribeModal() {
+            document.getElementById('subscribe-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSubscribeModal() {
+            document.getElementById('subscribe-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function showToast(msg) {
+            const el = document.createElement('div');
+            el.className = 'bg-white border border-[#E8E8E8] px-5 py-4 font-label text-[10px] tracking-widest shadow-lg max-w-xs';
+            el.innerHTML = `<span class="text-green">PATH NOMAD</span><br><span class="text-[#545454] normal-case tracking-normal text-xs mt-1 block">${msg}</span>`;
+            document.getElementById('toast-container').appendChild(el);
+            setTimeout(() => el.remove(), 5000);
+        }
+
+        function submitSubscription(e) {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target));
+            data.billing = billingMode;
+            const result = PathNomadMembers.submitApplication(data);
+            closeSubscribeModal();
+            e.target.reset();
+            if (!result.ok) {
+                showToast(result.error);
+                return;
+            }
+            showToast(`Thank you, ${data.name.split(' ')[0]}. Application received — we'll email ${data.email} within 48 hours. Once approved, use your access code at the member portal.`);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').classList.toggle('nav-scrolled', window.scrollY > 20);
+        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSubscribeModal(); });
+    </script>
+</body>
+</html>

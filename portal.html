@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATH NOMAD • Member Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Josefin+Sans:wght@400;600;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink: #1C1C1C; --muted: #545454; --green: #A8D65A; --line: #E8E8E8; }
+        body { font-family: 'Arimo', sans-serif; color: var(--ink); background: #fff; }
+        .font-label { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; font-size: 10px; }
+        .font-display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; }
+        .btn { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; font-size: 10px; font-weight: 600; padding: 12px 20px; }
+        .btn-dark { background: var(--ink); color: #fff; }
+        .btn-outline { border: 1px solid var(--ink); }
+        .text-green { color: var(--green); }
+        .portal-card { border: 1px solid var(--line); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="border-b border-[#E8E8E8] px-6 py-4 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur z-40">
+        <a href="index.html"><img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8"></a>
+        <span class="font-label text-green hidden sm:inline">Creative Nomads</span>
+        <button id="logout-btn" onclick="doLogout()" class="font-label text-[#545454] hover:text-[#1C1C1C] hidden">Sign out</button>
+    </header>
+
+    <!-- Login -->
+    <main id="login-view" class="max-w-md mx-auto px-6 py-20 text-center">
+        <img src="assets/logo-full.jpg" alt="" class="h-20 mx-auto mb-10">
+        <h1 class="font-display text-4xl text-[#545454] mb-2">Member portal</h1>
+        <p class="text-sm text-[#545454] mb-10">For approved Creative Nomads only. Use the access code sent when your application was approved.</p>
+        <form onsubmit="doLogin(event)" class="space-y-4 text-left">
+            <input type="email" id="login-email" required placeholder="EMAIL" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest">
+            <input type="text" id="login-code" required placeholder="ACCESS CODE" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest uppercase">
+            <button type="submit" class="btn btn-dark w-full mt-4">SIGN IN</button>
+        </form>
+        <p class="font-label text-[9px] text-[#545454] mt-8">Demo: demo@pathnomad.co / DEMO2026</p>
+        <a href="index.html#membership" class="font-label text-[9px] text-green mt-4 inline-block">Apply for membership →</a>
+    </main>
+
+    <!-- Dashboard -->
+    <main id="portal-view" class="hidden max-w-[1200px] mx-auto px-6 py-12">
+        <div class="mb-12">
+            <div class="font-label text-green mb-2">Welcome</div>
+            <h1 class="font-display text-5xl text-[#545454]" id="member-name">—</h1>
+            <p class="text-sm text-[#545454] mt-2" id="member-meta">—</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 mb-16">
+            <div class="portal-card p-6 lg:col-span-1">
+                <div class="font-label text-[#545454] mb-4">Membership</div>
+                <div class="text-3xl font-display" id="member-billing">R350</div>
+                <p class="font-label text-[9px] text-[#545454] mt-2" id="member-since">—</p>
+                <ul class="mt-6 space-y-2 text-[12px] text-[#545454]">
+                    <li>✓ Curated portfolio</li>
+                    <li>✓ Collector introductions</li>
+                    <li>✓ Exhibition priority</li>
+                    <li>✓ Member events &amp; archive</li>
+                </ul>
+            </div>
+            <div class="portal-card p-6 lg:col-span-2">
+                <div class="font-label text-[#545454] mb-4">Your profile</div>
+                <form onsubmit="saveProfile(event)" class="space-y-4">
+                    <div>
+                        <label class="font-label text-[9px] text-[#aaa]">Portfolio URL</label>
+                        <input type="url" id="profile-portfolio" class="w-full border-b border-[#E8E8E8] py-2 text-sm mt-1">
+                    </div>
+                    <div>
+                        <label class="font-label text-[9px] text-[#aaa]">Location</label>
+                        <input type="text" id="profile-location" class="w-full border-b border-[#E8E8E8] py-2 text-sm mt-1">
+                    </div>
+                    <div>
+                        <label class="font-label text-[9px] text-[#aaa]">Short bio</label>
+                        <textarea id="profile-bio" rows="3" class="w-full border border-[#E8E8E8] p-3 text-sm mt-1" placeholder="Artist statement for your member page…"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Save profile</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Member archive: dinners -->
+        <section class="mb-16 border-t border-[#E8E8E8] pt-12">
+            <div class="font-label text-green mb-2">Member archive</div>
+            <h2 class="font-display text-4xl text-[#545454] mb-2">Curated dinners &amp; experiences</h2>
+            <p class="text-sm text-[#545454] mb-10 max-w-xl">Exclusive documentation from PATH NOMAD collectors dinners and experiential events.</p>
+
+            <article class="mb-16">
+                <div class="grid md:grid-cols-2 gap-8 items-start mb-4">
+                    <div class="font-label text-[11px] leading-relaxed">
+                        COLLECTORS DINNER — JHB 2019<br>
+                        <span class="text-[#545454]">GUEST CHEF — CHEF DUEVAL MALONGA (RWANDA)</span>
+                    </div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p11-img0.jpg" alt="Chef plating" class="w-full h-full object-cover"></div>
+                </div>
+                <div class="aspect-[21/9] overflow-hidden"><img src="assets/portfolio/p11-img1.jpg" alt="Dinner in gallery" class="w-full h-full object-cover"></div>
+            </article>
+
+            <article class="mb-16">
+                <div class="font-label text-[11px] mb-4">BLUE DINNER — DOWNTOWN LA — 2021</div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p12-img0.jpg" alt="" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p12-img1.jpg" alt="" class="w-full h-full object-cover"></div>
+                </div>
+            </article>
+
+            <article class="mb-16">
+                <div class="font-label text-[11px] mb-4">BAC COLLECTORS DINNER — BEVERLY HILLS, LA — 2022</div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p13-img0.jpg" alt="" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p13-img1.jpg" alt="" class="w-full h-full object-cover"></div>
+                </div>
+            </article>
+
+            <article class="mb-16">
+                <div class="font-label text-[11px] mb-4">COLLECTORS DINNER — JHB — 2024</div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img0.jpg" alt="" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img1.jpg" alt="" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img2.jpg" alt="" class="w-full h-full object-cover"></div>
+                </div>
+            </article>
+
+            <article>
+                <div class="font-label text-[11px] mb-4">BEYOND THE TABLE DINNER — JHB — 2024</div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img0.jpg" alt="" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img1.jpg" alt="" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img2.jpg" alt="" class="w-full h-full object-cover"></div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Porsche -->
+        <section class="border-t border-[#E8E8E8] pt-12 mb-16">
+            <div class="font-label text-green mb-2">Member archive</div>
+            <h2 class="font-display text-4xl text-[#545454] mb-6">Porsche — Christophorus Art Car</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-start mb-4">
+                <div class="font-label text-[10px] leading-relaxed">ISSUE 400 · 2021 · PORSCHE EXCLUSIVE MAGAZINE · CHRISTOPHORUS ART CAR</div>
+                <div class="overflow-hidden"><img src="assets/portfolio/p25-img0.jpg" alt="Christophorus cover" class="w-full h-auto"></div>
+            </div>
+            <div class="aspect-[21/9] overflow-hidden"><img src="assets/portfolio/p25-img2.jpg" alt="Porsche art car" class="w-full h-full object-cover"></div>
+        </section>
+
+        <!-- TIME Magazine -->
+        <section class="border-t border-[#E8E8E8] pt-12 mb-16">
+            <div class="font-label text-green mb-2">Member archive</div>
+            <h2 class="font-display text-4xl text-[#545454] mb-6">TIME Magazine cover story</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-start mb-4">
+                <div class="font-label text-[10px] leading-relaxed">COVER STORY 2019 · THE ART OF OPTIMISM · NELSON MAKAMO</div>
+                <div class="overflow-hidden border-2 border-[#C41E3A] p-1"><img src="assets/portfolio/p26-img1.jpg" alt="TIME cover" class="w-full h-auto"></div>
+            </div>
+            <div class="aspect-[16/10] overflow-hidden"><img src="assets/portfolio/p26-img2.jpg" alt="Nelson Makamo mural" class="w-full h-full object-cover"></div>
+        </section>
+
+        <!-- Nelson Makamo -->
+        <section class="border-t border-[#E8E8E8] pt-12">
+            <div class="font-label text-green mb-2">Member archive</div>
+            <h2 class="font-display text-4xl text-[#545454] mb-4">Nelson Makamo — 3-month solo exhibition</h2>
+            <p class="font-label text-[10px] text-[#545454] leading-relaxed max-w-2xl mb-8">
+                FIRST INDEPENDENT SOLO EXHIBITION — USA / LA — NELSON MAKAMO, 2021<br>
+                PRODUCED, DESIGNED, INSTALLED AND MANAGED 3 MONTH LONG EVENT BY PATH NOMAD
+            </p>
+            <div class="space-y-4">
+                <div class="aspect-[16/10] overflow-hidden"><img src="assets/portfolio/p27-img1.jpg" alt="Nelson Makamo exhibition gallery" class="w-full h-full object-cover"></div>
+                <div class="aspect-[16/9] overflow-hidden"><img src="assets/portfolio/p27-img2.jpg" alt="Nelson Makamo installation view" class="w-full h-full object-cover"></div>
+            </div>
+        </section>
+
+        <div class="text-center mt-16 pdf-footer font-label text-[10px] text-[#545454]">
+            <a href="index.html" class="hover:text-green">← Public site</a>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed bottom-6 right-6 hidden bg-white border px-5 py-3 font-label text-[10px] shadow-lg z-50"></div>
+
+    <script src="js/pathnomad-members.js"></script>
+    <script>
+        function toast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 4000);
+        }
+
+        function doLogin(e) {
+            e.preventDefault();
+            const r = PathNomadMembers.memberLogin(
+                document.getElementById('login-email').value,
+                document.getElementById('login-code').value
+            );
+            if (!r.ok) { toast(r.error); return; }
+            showPortal(r.member);
+        }
+
+        function doLogout() {
+            PathNomadMembers.memberLogout();
+            document.getElementById('login-view').classList.remove('hidden');
+            document.getElementById('portal-view').classList.add('hidden');
+            document.getElementById('logout-btn').classList.add('hidden');
+        }
+
+        function showPortal(member) {
+            document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('portal-view').classList.remove('hidden');
+            document.getElementById('logout-btn').classList.remove('hidden');
+
+            document.getElementById('member-name').textContent = member.name;
+            document.getElementById('member-meta').textContent = `${member.discipline} · ${member.location}`;
+            document.getElementById('member-billing').textContent = member.billing === 'annual' ? 'R3,500 / year' : 'R350 / month';
+            document.getElementById('member-since').textContent = 'Member since ' + new Date(member.memberSince).toLocaleDateString('en-ZA', { month: 'long', year: 'numeric' });
+            document.getElementById('profile-portfolio').value = member.portfolio || '';
+            document.getElementById('profile-location').value = member.location || '';
+            document.getElementById('profile-bio').value = member.bio || '';
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            const r = PathNomadMembers.updateMemberProfile({
+                portfolio: document.getElementById('profile-portfolio').value,
+                location: document.getElementById('profile-location').value,
+                bio: document.getElementById('profile-bio').value,
+            });
+            if (r.ok) toast('Profile saved.');
+            else toast(r.error);
+        }
+
+        const session = PathNomadMembers.getSession();
+        if (session) showPortal(session.member);
+    </script>
+</body>
+</html>

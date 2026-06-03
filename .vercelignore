@@ -1,0 +1,6 @@
+node_modules
+pdf-extract
+PATH-NOMAD-Platform-Sendable.pdf
+generate-pdf.mjs
+package-lock.json
+*.zip

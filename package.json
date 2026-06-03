@@ -1,0 +1,12 @@
+{
+  "name": "pathnomad-platform",
+  "version": "1.0.0",
+  "description": "Merged company profile + Creative Nomads membership site. Branding matches the official PDF: white background, charcoal typography, lime-green logo accent (`#A8D65A`).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
