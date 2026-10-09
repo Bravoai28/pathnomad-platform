@@ -3,187 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F4F1ED">
     <title>PATH NOMAD • Member Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Josefin+Sans:wght@400;600;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        :root { --ink: #1C1C1C; --muted: #545454; --green: #A8D65A; --line: #E8E8E8; }
-        body { font-family: 'Arimo', sans-serif; color: var(--ink); background: #fff; }
-        .font-label { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; font-size: 10px; }
-        .font-display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; }
-        .btn { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; font-size: 10px; font-weight: 600; padding: 12px 20px; }
-        .btn-dark { background: var(--ink); color: #fff; }
-        .btn-outline { border: 1px solid var(--ink); }
-        .text-green { color: var(--green); }
-        .portal-card { border: 1px solid var(--line); }
-    </style>
+    <link rel="icon" type="image/jpeg" href="assets/logo-full.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/editorial.css">
 </head>
-<body class="min-h-screen">
-    <header class="border-b border-[#E8E8E8] px-6 py-4 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur z-40">
-        <a href="index.html"><img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8"></a>
-        <span class="font-label text-green hidden sm:inline">Creative Nomads</span>
-        <button id="logout-btn" onclick="doLogout()" class="font-label text-[#545454] hover:text-[#1C1C1C] hidden">Sign out</button>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header app-header">
+        <div class="site-header__inner">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="index.html">← <span class="hide-sm">Public site</span></a></li>
+            </ul>
+            <a class="brand" href="index.html" aria-label="PATH NOMAD — home"><img src="assets/logo-wordmark.jpg" alt="PATH NOMAD" width="647" height="89"></a>
+            <ul class="nav-list nav-list--right">
+                <li class="hide-sm"><span class="meta">Creative Nomads</span></li>
+                <li><button type="button" id="logout-btn" class="nav-link" style="background-color:transparent;border:0" hidden>Sign out</button></li>
+            </ul>
+        </div>
     </header>
 
-    <!-- Login -->
-    <main id="login-view" class="max-w-md mx-auto px-6 py-20 text-center">
-        <img src="assets/logo-full.jpg" alt="" class="h-20 mx-auto mb-10">
-        <h1 class="font-display text-4xl text-[#545454] mb-2">Member portal</h1>
-        <p class="text-sm text-[#545454] mb-10">For approved Creative Nomads only. Use the access code sent when your application was approved.</p>
-        <form onsubmit="doLogin(event)" class="space-y-4 text-left">
-            <input type="email" id="login-email" required placeholder="EMAIL" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest">
-            <input type="text" id="login-code" required placeholder="ACCESS CODE" class="w-full border-b border-[#E8E8E8] py-3 font-label text-[10px] tracking-widest uppercase">
-            <button type="submit" class="btn btn-dark w-full mt-4">SIGN IN</button>
-        </form>
-        <p class="font-label text-[9px] text-[#545454] mt-8">Demo: demo@pathnomad.co / DEMO2026</p>
-        <a href="index.html#membership" class="font-label text-[9px] text-green mt-4 inline-block">Apply for membership →</a>
-    </main>
-
-    <!-- Dashboard -->
-    <main id="portal-view" class="hidden max-w-[1200px] mx-auto px-6 py-12">
-        <div class="mb-12">
-            <div class="font-label text-green mb-2">Welcome</div>
-            <h1 class="font-display text-5xl text-[#545454]" id="member-name">—</h1>
-            <p class="text-sm text-[#545454] mt-2" id="member-meta">—</p>
-        </div>
-
-        <div class="grid lg:grid-cols-3 gap-8 mb-16">
-            <div class="portal-card p-6 lg:col-span-1">
-                <div class="font-label text-[#545454] mb-4">Membership</div>
-                <div class="text-3xl font-display" id="member-billing">R350</div>
-                <p class="font-label text-[9px] text-[#545454] mt-2" id="member-since">—</p>
-                <ul class="mt-6 space-y-2 text-[12px] text-[#545454]">
-                    <li>✓ Curated portfolio</li>
-                    <li>✓ Collector introductions</li>
-                    <li>✓ Exhibition priority</li>
-                    <li>✓ Member events &amp; archive</li>
-                </ul>
-            </div>
-            <div class="portal-card p-6 lg:col-span-2">
-                <div class="font-label text-[#545454] mb-4">Your profile</div>
-                <form onsubmit="saveProfile(event)" class="space-y-4">
-                    <div>
-                        <label class="font-label text-[9px] text-[#aaa]">Portfolio URL</label>
-                        <input type="url" id="profile-portfolio" class="w-full border-b border-[#E8E8E8] py-2 text-sm mt-1">
+    <div id="main">
+        <!-- Login -->
+        <main id="login-view" class="wrap section">
+            <div class="read center" style="max-width:28rem">
+                <p class="meta">Creative Nomads</p>
+                <h1 class="display mt-s" style="font-size:clamp(2.6rem,6vw,4rem)">Member portal</h1>
+                <p class="mt-m" style="color:var(--ink-soft)">For approved Creative Nomads only. Use the access code sent when your application was approved.</p>
+                <form id="login-form" class="form-stack mt-l" style="text-align:left">
+                    <div class="field">
+                        <label for="login-email">Email</label>
+                        <input class="input" type="email" id="login-email" required autocomplete="email">
                     </div>
-                    <div>
-                        <label class="font-label text-[9px] text-[#aaa]">Location</label>
-                        <input type="text" id="profile-location" class="w-full border-b border-[#E8E8E8] py-2 text-sm mt-1">
+                    <div class="field">
+                        <label for="login-code">Access code</label>
+                        <input class="input" type="text" id="login-code" required autocomplete="one-time-code" style="text-transform:uppercase;letter-spacing:.12em">
                     </div>
-                    <div>
-                        <label class="font-label text-[9px] text-[#aaa]">Short bio</label>
-                        <textarea id="profile-bio" rows="3" class="w-full border border-[#E8E8E8] p-3 text-sm mt-1" placeholder="Artist statement for your member page…"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-dark">Save profile</button>
+                    <button type="submit" class="btn btn--block">Sign in</button>
                 </form>
+                <p class="meta mt-l">Demo: demo@pathnomad.co / DEMO2026</p>
+                <p class="meta mt-s"><a href="index.html#membership">Apply for membership →</a></p>
             </div>
-        </div>
+        </main>
 
-        <!-- Member archive: dinners -->
-        <section class="mb-16 border-t border-[#E8E8E8] pt-12">
-            <div class="font-label text-green mb-2">Member archive</div>
-            <h2 class="font-display text-4xl text-[#545454] mb-2">Curated dinners &amp; experiences</h2>
-            <p class="text-sm text-[#545454] mb-10 max-w-xl">Exclusive documentation from PATH NOMAD collectors dinners and experiential events.</p>
+        <!-- Dashboard -->
+        <main id="portal-view" class="wrap" hidden>
+            <header class="article-head center" style="padding-bottom:clamp(2rem,4vw,3rem)">
+                <p class="meta">Welcome</p>
+                <h1 class="display mt-s" id="member-name">—</h1>
+                <p class="meta mt-s" id="member-meta">—</p>
+            </header>
+            <hr class="rule">
 
-            <article class="mb-16">
-                <div class="grid md:grid-cols-2 gap-8 items-start mb-4">
-                    <div class="font-label text-[11px] leading-relaxed">
-                        COLLECTORS DINNER — JHB 2019<br>
-                        <span class="text-[#545454]">GUEST CHEF — CHEF DUEVAL MALONGA (RWANDA)</span>
+            <div class="dash-grid" style="margin-top:clamp(2.5rem,5vw,4rem)">
+                <section class="panel" aria-labelledby="membership-h">
+                    <h2 class="meta" id="membership-h">Membership</h2>
+                    <p class="h3 mt-s" id="member-billing">R350</p>
+                    <p class="meta mt-s" id="member-since">—</p>
+                    <ul class="check-list">
+                        <li>Curated portfolio</li>
+                        <li>Collector introductions</li>
+                        <li>Exhibition priority</li>
+                        <li>Member events &amp; archive</li>
+                    </ul>
+                </section>
+                <section class="panel" aria-labelledby="profile-h">
+                    <h2 class="meta" id="profile-h">Your profile</h2>
+                    <form id="profile-form" class="form-stack mt-m">
+                        <div class="field">
+                            <label for="profile-portfolio">Portfolio URL</label>
+                            <input class="input" type="url" id="profile-portfolio" placeholder="https://">
+                        </div>
+                        <div class="field">
+                            <label for="profile-location">Location</label>
+                            <input class="input" type="text" id="profile-location">
+                        </div>
+                        <div class="field">
+                            <label for="profile-bio">Short bio</label>
+                            <textarea class="textarea" id="profile-bio" rows="4" placeholder="Artist statement for your member page…"></textarea>
+                        </div>
+                        <div><button type="submit" class="btn">Save profile</button></div>
+                    </form>
+                </section>
+            </div>
+
+            <!-- Member archive: dinners -->
+            <section class="section" aria-labelledby="archive-h">
+                <header class="section-head">
+                    <span class="meta">Member archive</span>
+                    <h2 class="h2" id="archive-h">Curated dinners &amp; experiences</h2>
+                    <p class="standfirst">Exclusive documentation from PATH NOMAD collectors dinners and experiential events.</p>
+                </header>
+
+                <div class="entry-block">
+                    <div class="pair pair-width">
+                        <figure><div class="frame r-3x4"><img src="assets/portfolio/p11-img0.jpg" alt="Chef Dueval Malonga plating dishes at the collectors dinner" loading="lazy" width="1101" height="1652"></div></figure>
+                        <figure><div class="frame r-3x4"><img src="assets/portfolio/p11-img1.jpg" alt="A long dining table set inside a gallery hung with contemporary art" loading="lazy" width="1977" height="1318"></div></figure>
                     </div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p11-img0.jpg" alt="Chef plating" class="w-full h-full object-cover"></div>
+                    <div class="entry">
+                        <h3 class="entry__title">1. Collectors Dinner<span class="sep">|</span>JHB 2019</h3>
+                        <p class="entry__body">Guest chef — Chef Dueval Malonga (Rwanda).</p>
+                    </div>
                 </div>
-                <div class="aspect-[21/9] overflow-hidden"><img src="assets/portfolio/p11-img1.jpg" alt="Dinner in gallery" class="w-full h-full object-cover"></div>
-            </article>
 
-            <article class="mb-16">
-                <div class="font-label text-[11px] mb-4">BLUE DINNER — DOWNTOWN LA — 2021</div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p12-img0.jpg" alt="" class="w-full h-full object-cover"></div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p12-img1.jpg" alt="" class="w-full h-full object-cover"></div>
+                <div class="entry-block">
+                    <div class="pair pair-width">
+                        <figure><div class="frame r-4x3"><img src="assets/portfolio/p12-img0.jpg" alt="Blue Dinner: blue-tinted glassware and table setting" loading="lazy" width="1040" height="1386"></div></figure>
+                        <figure><div class="frame r-4x3"><img src="assets/portfolio/p12-img1.jpg" alt="Blue Dinner: a long table under deep blue light in Downtown LA" loading="lazy" width="1386" height="1040"></div></figure>
+                    </div>
+                    <div class="entry"><h3 class="entry__title">2. Blue Dinner<span class="sep">|</span>Downtown LA — 2021</h3></div>
                 </div>
-            </article>
 
-            <article class="mb-16">
-                <div class="font-label text-[11px] mb-4">BAC COLLECTORS DINNER — BEVERLY HILLS, LA — 2022</div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p13-img0.jpg" alt="" class="w-full h-full object-cover"></div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p13-img1.jpg" alt="" class="w-full h-full object-cover"></div>
+                <div class="entry-block">
+                    <div class="pair pair-width">
+                        <figure><div class="frame r-4x3"><img src="assets/portfolio/p13-img0.jpg" alt="BAC Collectors Dinner: a long table with floral centrepieces" loading="lazy" width="908" height="1210"></div></figure>
+                        <figure><div class="frame r-4x3"><img src="assets/portfolio/p13-img1.jpg" alt="Guests seated at a candlelit dinner in Beverly Hills" loading="lazy" width="1470" height="980"></div></figure>
+                    </div>
+                    <div class="entry"><h3 class="entry__title">3. BAC Collectors Dinner<span class="sep">|</span>Beverly Hills, LA — 2022</h3></div>
                 </div>
-            </article>
 
-            <article class="mb-16">
-                <div class="font-label text-[11px] mb-4">COLLECTORS DINNER — JHB — 2024</div>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img0.jpg" alt="" class="w-full h-full object-cover"></div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img1.jpg" alt="" class="w-full h-full object-cover"></div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p14-img2.jpg" alt="" class="w-full h-full object-cover"></div>
+                <div class="entry-block">
+                    <div class="trio">
+                        <figure><div class="frame r-4x5"><img src="assets/portfolio/p14-img0.jpg" alt="Collectors Dinner Johannesburg 2024: The Collector printed menu cover" loading="lazy" width="840" height="840"></div></figure>
+                        <figure><div class="frame r-4x5"><img src="assets/portfolio/p14-img1.jpg" alt="Guests dining at a long table in a plant-filled venue" loading="lazy" width="1639" height="1093"></div></figure>
+                        <figure><div class="frame r-4x5"><img src="assets/portfolio/p14-img2.jpg" alt="Artworks behind a table with red flowers at the 2024 collectors dinner" loading="lazy" width="1093" height="1639"></div></figure>
+                    </div>
+                    <div class="entry"><h3 class="entry__title">4. Collectors Dinner<span class="sep">|</span>JHB — 2024</h3></div>
                 </div>
-            </article>
 
-            <article>
-                <div class="font-label text-[11px] mb-4">BEYOND THE TABLE DINNER — JHB — 2024</div>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img0.jpg" alt="" class="w-full h-full object-cover"></div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img1.jpg" alt="" class="w-full h-full object-cover"></div>
-                    <div class="aspect-[4/3] overflow-hidden"><img src="assets/portfolio/p15-img2.jpg" alt="" class="w-full h-full object-cover"></div>
+                <div class="entry-block">
+                    <div class="trio">
+                        <figure><div class="frame r-4x5"><img src="assets/portfolio/p15-img0.jpg" alt="Beyond the Table: a dressed dinner table with glassware" loading="lazy" width="1093" height="1639"></div></figure>
+                        <figure><div class="frame r-4x5"><img src="assets/portfolio/p15-img1.jpg" alt="Beyond the Table: a dining room set for guests beneath artworks" loading="lazy" width="1639" height="1093"></div></figure>
+                        <figure><div class="frame r-4x5"><img src="assets/portfolio/p15-img2.jpg" alt="Beyond the Table: a plated course on a white tablecloth" loading="lazy" width="908" height="1210"></div></figure>
+                    </div>
+                    <div class="entry"><h3 class="entry__title">5. Beyond the Table Dinner<span class="sep">|</span>JHB — 2024</h3></div>
                 </div>
-            </article>
-        </section>
+            </section>
 
-        <!-- Porsche -->
-        <section class="border-t border-[#E8E8E8] pt-12 mb-16">
-            <div class="font-label text-green mb-2">Member archive</div>
-            <h2 class="font-display text-4xl text-[#545454] mb-6">Porsche — Christophorus Art Car</h2>
-            <div class="grid md:grid-cols-2 gap-8 items-start mb-4">
-                <div class="font-label text-[10px] leading-relaxed">ISSUE 400 · 2021 · PORSCHE EXCLUSIVE MAGAZINE · CHRISTOPHORUS ART CAR</div>
-                <div class="overflow-hidden"><img src="assets/portfolio/p25-img0.jpg" alt="Christophorus cover" class="w-full h-auto"></div>
+            <!-- Porsche -->
+            <section class="section" aria-labelledby="porsche-h">
+                <header class="section-head">
+                    <span class="meta">Member archive</span>
+                    <h2 class="h2" id="porsche-h">Porsche — Christophorus Art Car</h2>
+                </header>
+                <div class="pair-width">
+                    <div class="feature">
+                        <figure class="cover-frame"><img src="assets/portfolio/p25-img0.jpg" alt="Christophorus magazine Issue 400 cover" loading="lazy" width="480" height="640"></figure>
+                        <p class="meta">Issue 400 · 2021 · Porsche Exclusive Magazine · Christophorus Art Car</p>
+                    </div>
+                    <figure class="mt-l"><div class="frame"><img src="assets/portfolio/p25-img2.jpg" alt="Porsche 911 art car with Christophorus custom wrap" loading="lazy" width="705" height="375"></div></figure>
+                </div>
+            </section>
+
+            <!-- TIME Magazine -->
+            <section class="section" aria-labelledby="time-h">
+                <header class="section-head">
+                    <span class="meta">Member archive</span>
+                    <h2 class="h2" id="time-h">TIME Magazine cover story</h2>
+                </header>
+                <div class="pair-width">
+                    <div class="feature">
+                        <figure class="cover-frame cover-frame--time"><img src="assets/portfolio/p26-img1.jpg" alt="TIME Magazine cover — The Art of Optimism featuring Nelson Makamo" loading="lazy" width="709" height="945"></figure>
+                        <p class="meta">Cover story 2019 · The Art of Optimism · Nelson Makamo</p>
+                    </div>
+                    <figure class="mt-l"><div class="frame r-16x9"><img src="assets/portfolio/p26-img2.jpg" alt="Nelson Makamo painting a mural for the TIME cover story" loading="lazy" width="926" height="554"></div></figure>
+                </div>
+            </section>
+
+            <!-- Nelson Makamo -->
+            <section class="section" aria-labelledby="makamo-h">
+                <header class="section-head">
+                    <span class="meta">Member archive</span>
+                    <h2 class="h2" id="makamo-h">Nelson Makamo — 3-month solo exhibition</h2>
+                    <p class="standfirst">First independent solo exhibition — USA / LA — Nelson Makamo, 2021. Produced, designed, installed and managed 3 month long event by PATH NOMAD.</p>
+                </header>
+                <figure class="pair-width"><div class="frame r-3x2"><img src="assets/portfolio/p27-img1.jpg" alt="Nelson Makamo exhibition gallery with blue portraits" loading="lazy" width="1024" height="768"></div></figure>
+                <figure class="pair-width mt-l"><div class="frame r-3x2"><img src="assets/portfolio/p27-img2.jpg" alt="Nelson Makamo installation view" loading="lazy" width="1800" height="1200"></div></figure>
+                <p class="meta center mt-xl"><a href="index.html">← Public site</a></p>
+            </section>
+        </main>
+    </div>
+
+    <footer class="site-footer" style="padding-top:2rem">
+        <div class="wrap">
+            <div class="footer-bottom" style="margin-top:0;border-top:0;padding-top:0">
+                <span>PATH NOMAD © 2026</span>
+                <span><a href="mailto:work@pathnomad.co">work@pathnomad.co</a></span>
             </div>
-            <div class="aspect-[21/9] overflow-hidden"><img src="assets/portfolio/p25-img2.jpg" alt="Porsche art car" class="w-full h-full object-cover"></div>
-        </section>
-
-        <!-- TIME Magazine -->
-        <section class="border-t border-[#E8E8E8] pt-12 mb-16">
-            <div class="font-label text-green mb-2">Member archive</div>
-            <h2 class="font-display text-4xl text-[#545454] mb-6">TIME Magazine cover story</h2>
-            <div class="grid md:grid-cols-2 gap-8 items-start mb-4">
-                <div class="font-label text-[10px] leading-relaxed">COVER STORY 2019 · THE ART OF OPTIMISM · NELSON MAKAMO</div>
-                <div class="overflow-hidden border-2 border-[#C41E3A] p-1"><img src="assets/portfolio/p26-img1.jpg" alt="TIME cover" class="w-full h-auto"></div>
-            </div>
-            <div class="aspect-[16/10] overflow-hidden"><img src="assets/portfolio/p26-img2.jpg" alt="Nelson Makamo mural" class="w-full h-full object-cover"></div>
-        </section>
-
-        <!-- Nelson Makamo -->
-        <section class="border-t border-[#E8E8E8] pt-12">
-            <div class="font-label text-green mb-2">Member archive</div>
-            <h2 class="font-display text-4xl text-[#545454] mb-4">Nelson Makamo — 3-month solo exhibition</h2>
-            <p class="font-label text-[10px] text-[#545454] leading-relaxed max-w-2xl mb-8">
-                FIRST INDEPENDENT SOLO EXHIBITION — USA / LA — NELSON MAKAMO, 2021<br>
-                PRODUCED, DESIGNED, INSTALLED AND MANAGED 3 MONTH LONG EVENT BY PATH NOMAD
-            </p>
-            <div class="space-y-4">
-                <div class="aspect-[16/10] overflow-hidden"><img src="assets/portfolio/p27-img1.jpg" alt="Nelson Makamo exhibition gallery" class="w-full h-full object-cover"></div>
-                <div class="aspect-[16/9] overflow-hidden"><img src="assets/portfolio/p27-img2.jpg" alt="Nelson Makamo installation view" class="w-full h-full object-cover"></div>
-            </div>
-        </section>
-
-        <div class="text-center mt-16 pdf-footer font-label text-[10px] text-[#545454]">
-            <a href="index.html" class="hover:text-green">← Public site</a>
         </div>
-    </main>
-
-    <div id="toast" class="fixed bottom-6 right-6 hidden bg-white border px-5 py-3 font-label text-[10px] shadow-lg z-50"></div>
+    </footer>
 
     <script src="js/pathnomad-members.js"></script>
+    <script src="js/site.js"></script>
     <script>
-        function toast(msg) {
-            const el = document.getElementById('toast');
-            el.textContent = msg;
-            el.classList.remove('hidden');
-            setTimeout(() => el.classList.add('hidden'), 4000);
-        }
+        const toast = (msg) => PNToast(msg);
 
-        function doLogin(e) {
+        document.getElementById('login-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const r = PathNomadMembers.memberLogin(
                 document.getElementById('login-email').value,
@@ -191,19 +211,20 @@
             );
             if (!r.ok) { toast(r.error); return; }
             showPortal(r.member);
-        }
+        });
 
         function doLogout() {
             PathNomadMembers.memberLogout();
-            document.getElementById('login-view').classList.remove('hidden');
-            document.getElementById('portal-view').classList.add('hidden');
-            document.getElementById('logout-btn').classList.add('hidden');
+            document.getElementById('login-view').hidden = false;
+            document.getElementById('portal-view').hidden = true;
+            document.getElementById('logout-btn').hidden = true;
         }
+        document.getElementById('logout-btn').addEventListener('click', doLogout);
 
         function showPortal(member) {
-            document.getElementById('login-view').classList.add('hidden');
-            document.getElementById('portal-view').classList.remove('hidden');
-            document.getElementById('logout-btn').classList.remove('hidden');
+            document.getElementById('login-view').hidden = true;
+            document.getElementById('portal-view').hidden = false;
+            document.getElementById('logout-btn').hidden = false;
 
             document.getElementById('member-name').textContent = member.name;
             document.getElementById('member-meta').textContent = `${member.discipline} · ${member.location}`;
@@ -214,16 +235,15 @@
             document.getElementById('profile-bio').value = member.bio || '';
         }
 
-        function saveProfile(e) {
+        document.getElementById('profile-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const r = PathNomadMembers.updateMemberProfile({
                 portfolio: document.getElementById('profile-portfolio').value,
                 location: document.getElementById('profile-location').value,
                 bio: document.getElementById('profile-bio').value,
             });
-            if (r.ok) toast('Profile saved.');
-            else toast(r.error);
-        }
+            toast(r.ok ? 'Profile saved.' : r.error);
+        });
 
         const session = PathNomadMembers.getSession();
         if (session) showPortal(session.member);

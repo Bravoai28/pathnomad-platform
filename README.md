@@ -1,6 +1,15 @@
 # PATH NOMAD Platform
 
-Merged company profile + Creative Nomads membership site. Branding matches the official PDF: white background, charcoal typography, lime-green logo accent (`#A8D65A`).
+Merged company profile + Creative Nomads membership site.
+
+## Design system (editorial theme)
+
+The site uses a quiet, gallery-like journal style defined in `css/editorial.css` (no CSS framework, no build step):
+
+- **Palette:** warm paper background `#F4F1ED`, ink `#111111`, muted taupe text `#5E594F`, taupe footer `#66604F`; the PATH NOMAD lime (`#A8D65A`) is kept for the logo and small decorative accents.
+- **Type:** *Cormorant Garamond* (light display serif) for headings, *Jost* (geometric sans) for body text and small uppercase meta labels. Both load from Google Fonts.
+- **Layout:** split navigation with a centred wordmark, narrow reading columns, image pairs/trios with simple `Name | Place` captions, numbered journal-style entries, generous whitespace.
+- **Accessibility:** semantic landmarks and headings, skip link, labelled form fields, keyboard-friendly modal (focus trap + Esc), `aria-pressed` billing toggle, WCAG AA text contrast, reduced-motion support.
 
 ## Membership
 
@@ -34,8 +43,10 @@ open "/Users/hayiki/Downloads/pathnomad-platform/index.html"
 - `index.html` — public site (profile + subscription)
 - `portal.html` — **approved member** sign-in & archive
 - `admin.html` — approve applications, issue access codes
+- `css/editorial.css` — shared editorial theme for all pages
+- `js/site.js` — navigation, reveal-on-scroll and toast helpers
 - `js/pathnomad-members.js` — applications & membership (localStorage)
-- `assets/logo.jpg` · `assets/logo-full.jpg` — branding from PDF
+- `assets/logo.jpg` · `assets/logo-full.jpg` — branding from PDF (`assets/logo-wordmark.jpg` is a tight crop of `logo.jpg` used in the header)
 - `assets/portfolio/` — images from company profile PDF
 
 ## Member flow
