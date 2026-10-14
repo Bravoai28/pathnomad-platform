@@ -3,83 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#F4F1ED">
     <title>PATH NOMAD • Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --ink: #1C1C1C; --muted: #545454; --green: #A8D65A; --line: #E8E8E8; }
-        body { font-family: 'Arimo', sans-serif; color: var(--ink); background: #fff; }
-        .font-label { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; font-size: 10px; }
-        .btn { font-family: 'Josefin Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; font-size: 10px; font-weight: 600; padding: 10px 18px; }
-        .btn-dark { background: var(--ink); color: #fff; }
-        .btn-green { background: var(--green); color: var(--ink); }
-        .btn-outline { border: 1px solid var(--ink); }
-    </style>
+    <link rel="icon" type="image/jpeg" href="assets/logo-full.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/editorial.css">
 </head>
-<body class="min-h-screen">
-    <header class="border-b border-[#E8E8E8] px-6 py-4 flex justify-between items-center">
-        <a href="index.html"><img src="assets/logo.jpg" alt="PATH NOMAD" class="h-8"></a>
-        <span class="font-label text-[#545454]">Admin — Applications</span>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header app-header">
+        <div class="site-header__inner">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="index.html">← <span class="hide-sm">Back to site</span></a></li>
+            </ul>
+            <a class="brand" href="index.html" aria-label="PATH NOMAD — home"><img src="assets/logo-wordmark.jpg" alt="PATH NOMAD" width="647" height="89"></a>
+            <ul class="nav-list nav-list--right">
+                <li><span class="meta">Admin<span class="hide-sm"> — Applications</span></span></li>
+            </ul>
+        </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-12">
-        <div id="login-panel" class="max-w-sm mx-auto text-center">
-            <h1 class="font-label text-sm mb-6">Admin sign in</h1>
-            <input type="password" id="admin-pin" placeholder="ADMIN PIN" class="w-full border border-[#E8E8E8] px-4 py-3 font-label text-[10px] tracking-widest mb-4 text-center">
-            <button onclick="doAdminLogin()" class="btn btn-dark w-full">ENTER</button>
-            <p class="font-label text-[9px] text-[#545454] mt-6">Default PIN: pathnomad-admin-2026</p>
-            <a href="index.html" class="font-label text-[9px] text-[#545454] mt-4 inline-block hover:text-[#1C1C1C]">← Back to site</a>
+    <main id="main" class="wrap section">
+        <div id="login-panel" class="read center" style="max-width:24rem">
+            <p class="meta">Restricted</p>
+            <h1 class="display mt-s" style="font-size:clamp(2.4rem,5vw,3.5rem)">Admin sign in</h1>
+            <form id="admin-form" class="form-stack mt-l" style="text-align:left">
+                <div class="field">
+                    <label for="admin-pin">Admin PIN</label>
+                    <input class="input" type="password" id="admin-pin" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn--block">Enter</button>
+            </form>
+            <p class="meta mt-l">Default PIN: pathnomad-admin-2026</p>
+            <p class="meta mt-s"><a href="index.html">← Back to site</a></p>
         </div>
 
-        <div id="dashboard" class="hidden">
-            <div class="flex flex-wrap justify-between items-center gap-4 mb-10">
+        <div id="dashboard" hidden>
+            <div class="pair-width" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:2.5rem">
                 <div>
-                    <h1 class="font-label text-sm">Pending applications</h1>
-                    <p class="text-sm text-[#545454] mt-1">Approve to issue portal access code</p>
+                    <p class="meta">Creative Nomads</p>
+                    <h1 class="h2 mt-s">Pending applications</h1>
+                    <p class="mt-s" style="color:var(--ink-soft)">Approve to issue portal access code</p>
                 </div>
-                <div class="flex gap-3">
-                    <a href="portal.html" class="btn btn-outline">Member portal</a>
-                    <button onclick="doAdminLogout()" class="btn btn-outline">Sign out</button>
+                <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+                    <a href="portal.html" class="btn btn--ghost btn--small">Member portal</a>
+                    <button type="button" id="admin-logout" class="btn btn--ghost btn--small">Sign out</button>
                 </div>
             </div>
 
-            <div id="apps-list" class="space-y-4"></div>
+            <div id="apps-list" class="pair-width" style="border-top:1px solid var(--rule-strong)"></div>
 
-            <section class="mt-16 border-t border-[#E8E8E8] pt-12">
-                <h2 class="font-label text-sm mb-6">Approved members</h2>
-                <div id="members-list" class="space-y-3"></div>
+            <section class="pair-width mt-xl" aria-labelledby="members-h">
+                <h2 class="h3" id="members-h" style="margin-bottom:1.5rem">Approved members</h2>
+                <div id="members-list" style="border-top:1px solid var(--rule-strong)"></div>
             </section>
         </div>
     </main>
 
-    <div id="toast" class="fixed bottom-6 right-6 hidden bg-white border border-[#E8E8E8] px-5 py-4 font-label text-[10px] shadow-lg max-w-sm z-50"></div>
-
     <script src="js/pathnomad-members.js"></script>
+    <script src="js/site.js"></script>
     <script>
+        // Escape user-submitted values before inserting them into markup.
+        const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const safeUrl = (u) => /^https?:\/\//i.test(u || '') ? u : '';
+
         function toast(msg, isCode) {
-            const el = document.getElementById('toast');
-            el.innerHTML = isCode
-                ? `<span style="color:#A8D65A">APPROVED</span><br><span class="normal-case tracking-normal text-xs text-[#545454] mt-2 block">Access code: <strong class="text-[#1C1C1C] text-base tracking-widest">${msg}</strong><br>Share with member for portal login.</span>`
-                : `<span style="color:#A8D65A">PATH NOMAD</span><br><span class="normal-case tracking-normal text-xs text-[#545454] mt-1 block">${msg}</span>`;
-            el.classList.remove('hidden');
-            setTimeout(() => el.classList.add('hidden'), 8000);
+            if (isCode) PNToast('Share this access code with the member for portal login.', { title: 'Approved', code: msg, duration: 10000 });
+            else PNToast(msg);
         }
 
-        function doAdminLogin() {
+        document.getElementById('admin-form').addEventListener('submit', function (e) {
+            e.preventDefault();
             const r = PathNomadMembers.adminLogin(document.getElementById('admin-pin').value.trim());
             if (!r.ok) { toast(r.error); return; }
             showDashboard();
-        }
+        });
 
-        function doAdminLogout() {
+        document.getElementById('admin-logout').addEventListener('click', function () {
             PathNomadMembers.adminLogout();
-            document.getElementById('login-panel').classList.remove('hidden');
-            document.getElementById('dashboard').classList.add('hidden');
-        }
+            document.getElementById('login-panel').hidden = false;
+            document.getElementById('dashboard').hidden = true;
+        });
 
         function showDashboard() {
-            document.getElementById('login-panel').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('login-panel').hidden = true;
+            document.getElementById('dashboard').hidden = false;
             render();
         }
 
@@ -89,60 +101,62 @@
             const list = document.getElementById('apps-list');
 
             if (!pending.length) {
-                list.innerHTML = '<p class="text-sm text-[#545454] py-8 text-center border border-[#E8E8E8]">No pending applications.</p>';
+                list.innerHTML = '<p class="empty" style="border-top:0">No pending applications.</p>';
             } else {
-                list.innerHTML = pending.map(app => `
-                    <article class="border border-[#E8E8E8] p-6 flex flex-col md:flex-row md:justify-between gap-4">
+                list.innerHTML = pending.map(app => {
+                    const url = safeUrl(app.portfolio);
+                    return `
+                    <article class="app-row">
                         <div>
-                            <div class="font-label text-[11px] font-semibold text-[#1C1C1C]">${app.name}</div>
-                            <div class="text-sm text-[#545454] mt-1">${app.email}</div>
-                            <div class="font-label text-[9px] text-[#545454] mt-2">${app.discipline} · ${app.location} · ${app.billing === 'annual' ? 'R3,500/yr' : 'R350/mo'}</div>
-                            ${app.portfolio ? `<a href="${app.portfolio}" target="_blank" class="text-xs text-[#A8D65A] mt-2 inline-block">Portfolio →</a>` : ''}
-                            <div class="font-label text-[9px] text-[#aaa] mt-2">Applied ${new Date(app.createdAt).toLocaleDateString()}</div>
+                            <h3 class="h3" style="font-size:1.5rem">${esc(app.name)}</h3>
+                            <p style="color:var(--ink-soft)">${esc(app.email)}</p>
+                            <p class="meta mt-s">${esc(app.discipline)} · ${esc(app.location)} · ${app.billing === 'annual' ? 'R3,500/yr' : 'R350/mo'}</p>
+                            ${url ? `<p class="meta"><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">Portfolio →</a></p>` : ''}
+                            <p class="meta">Applied ${esc(new Date(app.createdAt).toLocaleDateString())}</p>
                         </div>
-                        <div class="flex gap-2 shrink-0">
-                            <button onclick="approve('${app.id}')" class="btn btn-green">Approve</button>
-                            <button onclick="reject('${app.id}')" class="btn btn-outline">Reject</button>
+                        <div class="app-row__actions">
+                            <button type="button" class="btn btn--small" data-approve="${esc(app.id)}">Approve</button>
+                            <button type="button" class="btn btn--ghost btn--small" data-reject="${esc(app.id)}">Reject</button>
                         </div>
-                    </article>
-                `).join('');
+                    </article>`;
+                }).join('');
             }
 
             const members = PathNomadMembers.getMembers();
             document.getElementById('members-list').innerHTML = members.length
                 ? members.map(m => `
-                    <div class="flex flex-wrap justify-between items-center gap-3 border-b border-[#E8E8E8] py-4">
+                    <div class="app-row">
                         <div>
-                            <span class="font-label text-[10px]">${m.name}</span>
-                            <span class="text-sm text-[#545454] ml-3">${m.email}</span>
-                            <span class="font-label text-[9px] text-[#A8D65A] ml-3">Code: ${m.accessCode}</span>
+                            <p style="font-weight:400">${esc(m.name)}</p>
+                            <p class="meta">${esc(m.email)} · Code: <span style="color:var(--ink);letter-spacing:.12em">${esc(m.accessCode)}</span></p>
                         </div>
-                        <button onclick="revoke('${m.email}')" class="btn btn-outline text-[9px]">Revoke</button>
+                        <button type="button" class="btn btn--ghost btn--small" data-revoke="${esc(m.email)}">Revoke</button>
                     </div>
                 `).join('')
-                : '<p class="text-sm text-[#545454]">No approved members yet.</p>';
+                : '<p class="empty" style="border-top:0">No approved members yet.</p>';
         }
 
-        function approve(id) {
-            const r = PathNomadMembers.approveApplication(id);
-            if (!r.ok) { toast(r.error); return; }
-            toast(r.accessCode, true);
-            render();
-        }
-
-        function reject(id) {
-            const r = PathNomadMembers.rejectApplication(id);
-            if (!r.ok) { toast(r.error); return; }
-            toast('Application rejected.');
-            render();
-        }
-
-        function revoke(email) {
-            if (!confirm('Revoke this member\'s portal access?')) return;
-            PathNomadMembers.revokeMember(email);
-            toast('Member access revoked.');
-            render();
-        }
+        document.getElementById('dashboard').addEventListener('click', function (e) {
+            const a = e.target.closest('[data-approve]');
+            const rj = e.target.closest('[data-reject]');
+            const rv = e.target.closest('[data-revoke]');
+            if (a) {
+                const r = PathNomadMembers.approveApplication(a.dataset.approve);
+                if (!r.ok) { toast(r.error); return; }
+                toast(r.accessCode, true);
+                render();
+            } else if (rj) {
+                const r = PathNomadMembers.rejectApplication(rj.dataset.reject);
+                if (!r.ok) { toast(r.error); return; }
+                toast('Application rejected.');
+                render();
+            } else if (rv) {
+                if (!confirm('Revoke this member\'s portal access?')) return;
+                PathNomadMembers.revokeMember(rv.dataset.revoke);
+                toast('Member access revoked.');
+                render();
+            }
+        });
 
         if (PathNomadMembers.isAdminLoggedIn()) showDashboard();
     </script>
